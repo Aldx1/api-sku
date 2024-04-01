@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sku-api", "sku-api.csproj", "{141C46AB-221E-420B-858D-2B9FD2C2D321}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{141C46AB-221E-420B-858D-2B9FD2C2D321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141C46AB-221E-420B-858D-2B9FD2C2D321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141C46AB-221E-420B-858D-2B9FD2C2D321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141C46AB-221E-420B-858D-2B9FD2C2D321}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F1A2D65-1B0C-479D-AE07-5EFA3732E530}
+	EndGlobalSection
+EndGlobal
