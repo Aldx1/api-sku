@@ -5,13 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 public class StoreService : IStoreService
 {
-    private readonly IUserService _userService;
     private readonly StoreDbContext _context;
     private readonly Serilog.ILogger _logger;
 
-    public StoreService(IUserService userService, StoreDbContext context, Serilog.ILogger logger)
+    public StoreService(StoreDbContext context, Serilog.ILogger logger)
     {
-        _userService = userService;
         _context = context;
         _logger = logger;
     }
