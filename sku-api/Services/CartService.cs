@@ -15,6 +15,11 @@ public class CartService : ICartService
         _logger = logger;
     }
 
+
+    /// <summary>
+    /// Retrieve the cart for that user
+    /// </summary>
+    /// <returns>The cart, only have 1 cart per user</returns>
     private async Task<Cart> GetCart()
     {
         try
@@ -128,6 +133,10 @@ public class CartService : ICartService
         }
     }
 
+    /// <summary>
+    /// Set the total price for the cart
+    /// </summary>
+    /// <param name="cart"></param>
     private void UpdateCartTotalAndOffersApplied(Cart cart)
     {
         decimal currentTotal = 0;
@@ -145,6 +154,11 @@ public class CartService : ICartService
     }
 
 
+    /// <summary>
+    /// Set the total price for that item, based on offers
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <returns>Item1 = product total, Item2 = number of times offer has been applied (if any available)</returns>
     private (decimal, int) GetProductPriceWithOffers(decimal productPrice, int productQuantity, int? offerQuantity, decimal? offerPrice)
     {
         decimal priceWithoutOffers = productPrice * productQuantity;
@@ -181,49 +195,54 @@ public class CartService : ICartService
             var cart = await GetCart();
             if (cart == null || string.IsNullOrWhiteSpace(cart.CartProductsJson))
             {
-                return new UpdateResult()
-                {
-                    Success = false,
-                    Message = "No cart items"
-                };
+                return Unsuccessful("No cart items");
             }
 
+            // Create order 
             var order = new Order(cart);
 
+            // Delete cart
             var deleteCartResult = await _context.AttemptDelete(_context.Carts, new List<int> { cart.Id }, _logger);
 
+            // Save order
             if (deleteCartResult.Success)
             {
                 var addOrderResult = await _context.AttemptUpdate(_context.Orders, new List<Order> { order }, [], [], _logger);
 
                 if (addOrderResult.Success)
                 {
-                    return new UpdateResult()
-                    {
-                        Success = true,
-                        Message = "",
-                        UpdateResultObject = new OrderDTO(order)
-                    };
+                    return Successful("", new OrderDTO(order));
                 }
 
-                return new UpdateResult()
-                {
-                    Success = false,
-                    Message = "Couldn't add order"
-                };
+                return Unsuccessful("Couldn't add order");
             }
 
-            return new UpdateResult()
-            {
-                Success = false,
-                Message = "Couldn't delete cart"
-            };
-
+            return Unsuccessful("Couldn't delete cart");
         }
         catch (Exception ex)
         {
             _logger.Error<Exception>(ex.Message, ex);
             return new UpdateResult() { Success = false, Message = "Inner error" };
         }
+    }
+
+
+    private UpdateResult Unsuccessful(string message)
+    {
+        return new UpdateResult()
+        {
+            Success = false,
+            Message = message
+        };
+    }
+
+    private UpdateResult Successful(string message, object? resultObject)
+    {
+        return new UpdateResult()
+        {
+            Success = true,
+            Message = message,
+            UpdateResultObject = resultObject
+        };
     }
 }

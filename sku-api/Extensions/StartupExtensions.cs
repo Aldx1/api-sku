@@ -7,6 +7,10 @@ using Serilog;
 
 public static class StartupExtensions
 {
+    /// <summary>
+    /// Configures services in the application's dependency injection container.
+    /// </summary>
+    /// <param name="builder">The application builder.</param>
     public static void ConfigureServices(this IHostApplicationBuilder builder)
     {
         builder.Services.AddTransient<ISeedDataService, StoreSeedService>();
@@ -22,17 +26,17 @@ public static class StartupExtensions
         }
 
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
+            .AddJwtBearer(options =>
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = false,
-            };
-        });
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                };
+            });
 
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddAuthorization();
@@ -73,7 +77,10 @@ public static class StartupExtensions
         });
     }
 
-
+    /// <summary>
+    /// Configures the application itself.
+    /// </summary>
+    /// <param name="app">The web application.</param>
     public static void ConfigureApp(this WebApplication app)
     {
         app.UseMiddleware<JwtMiddleware>();

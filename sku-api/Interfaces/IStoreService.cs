@@ -1,10 +1,42 @@
 public interface IStoreService
 {
+    /// <summary> Get Store </summary>
+    /// <returns>
+    /// Store Product DTOs (products combined with their offers)
+    /// </returns>
     Task<IEnumerable<StoreProductDTO>> GetStore();
+
+    /// <summary> Get Products </summary>
+    /// <returns>
+    /// List of Products
+    /// </returns>
     Task<IEnumerable<Product>> GetProducts();
+
+    /// <summary> Get Product </summary>
+    /// <param name="id"></param>
+    /// <returns>
+    /// A product if found
+    /// </returns>
     Task<Product?> GetProduct(int id);
+
+    /// <summary> Get Offers </summary>
+    /// <returns>
+    /// List of offers
+    /// </returns>
     Task<IEnumerable<Offer>> GetOffers();
+
+    /// <summary> Get Offer </summary>
+    /// <param name="id"></param>
+    /// <returns>
+    /// Offer if found
+    /// </returns>
     Task<Offer?> GetOffer(int id);
+
+    /// <summary> Get Offers </summary>
+    /// <param name="productId"></param>
+    /// <returns>
+    /// Offers if found
+    /// </returns>
     Task<IEnumerable<Offer>?> GetOffers(int productId);
 
     /// <summary> Add Products </summary>

@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 [ProducesResponseType(StatusCodes.Status404NotFound)]
 [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
 public class CartController : ControllerBase
 {
-
     private readonly ICartService _cartService;
 
     public CartController(ICartService service)
@@ -18,8 +16,12 @@ public class CartController : ControllerBase
         _cartService = service;
     }
 
+    /// <summary>
+    /// Retrieves the cart details.
+    /// </summary>
+    /// <returns>The cart details.</returns>
     [HttpGet("")]
-    [ProducesResponseType<CartDTO>(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(CartDTO), StatusCodes.Status200OK)]
     public async Task<ActionResult<CartDTO>> GetCart()
     {
         var cart = await _cartService.GetCartDTO();
@@ -32,8 +34,12 @@ public class CartController : ControllerBase
         return Ok(cart);
     }
 
+    /// <summary>
+    /// Gets a list of orders.
+    /// </summary>
+    /// <returns>A list of orders.</returns>
     [HttpGet("order")]
-    [ProducesResponseType<IEnumerable<OrderDTO>>(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<OrderDTO>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
     {
         var orders = await _cartService.GetOrders();
@@ -46,8 +52,12 @@ public class CartController : ControllerBase
         return Ok(orders);
     }
 
+    /// <summary>
+    /// Performs the checkout process.
+    /// </summary>
+    /// <returns>The result of the checkout.</returns>
     [HttpPost("checkout")]
-    [ProducesResponseType<UpdateResult>(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UpdateResult), StatusCodes.Status200OK)]
     public async Task<ActionResult<UpdateResult>> Checkout()
     {
         var order = await _cartService.Checkout();
@@ -60,8 +70,13 @@ public class CartController : ControllerBase
         return Ok(order);
     }
 
+    /// <summary>
+    /// Updates the products in the cart.
+    /// </summary>
+    /// <param name="products">The list of products to be updated.</param>
+    /// <returns>The updated cart details.</returns>
     [HttpPut("product")]
-    [ProducesResponseType<UpdateResult>(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UpdateResult), StatusCodes.Status200OK)]
     public async Task<ActionResult<UpdateResult>> PutProducts([FromBody] IEnumerable<StoreProductDTO> products)
     {
         var cart = await _cartService.PutProducts(products);

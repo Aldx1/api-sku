@@ -1,6 +1,7 @@
 /// <summary>
 /// Data Transfer object for Get:Store 
 /// attaches relevant offer to products
+/// Used for cart quantities. 
 /// </summary>
 
 public class StoreProductDTO
