@@ -153,7 +153,7 @@ public static class StoreContextAndSetExtensions
         return false;
     }
 
-    public static async Task<UpdateResult> AttemptUpdate<T>(this DbContext context, DbSet<T> dbSet, IEnumerable<T> setObjects, string[] validationProps, string[] existingObjectProps, Serilog.ILogger logger) where T : class
+    public static async Task<UpdateResult> AttemptUpdate<T>(this IStoreDbContext context, DbSet<T> dbSet, IEnumerable<T> setObjects, string[] validationProps, string[] existingObjectProps, Serilog.ILogger logger) where T : class
     {
         int attempt = 1;
 
@@ -211,7 +211,7 @@ public static class StoreContextAndSetExtensions
         return new UpdateResult() { Success = false, Message = "Error adding objects" };
     }
 
-    public static async Task<UpdateResult> AttemptDelete<T>(this DbContext context, DbSet<T> dbSet, IEnumerable<int> objectIds, Serilog.ILogger logger) where T : class
+    public static async Task<UpdateResult> AttemptDelete<T>(this IStoreDbContext context, DbSet<T> dbSet, IEnumerable<int> objectIds, Serilog.ILogger logger) where T : class
     {
         int attempt = 1;
 

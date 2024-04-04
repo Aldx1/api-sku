@@ -13,7 +13,7 @@ public interface IUserService
 
     /// <summary>
     /// Create a user
-    /// </summary> Hello
+    /// </summary> 
     /// <param name="loginModel"></param>
     /// <returns>
     /// - A successful HTTP response (status code 201) containing the user's auth token

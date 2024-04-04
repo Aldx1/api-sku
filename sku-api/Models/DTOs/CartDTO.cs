@@ -11,4 +11,6 @@ public class CartDTO
         CartItemsJson = cart.CartProductsJson;
         TotalPrice = cart.TotalPrice;
     }
+
+    public CartDTO() { }
 }

@@ -1,8 +1,8 @@
 public class StoreSeedService : ISeedDataService
 {
-    private readonly StoreDbContext _context;
+    private readonly IStoreDbContext _context;
 
-    public StoreSeedService(StoreDbContext context)
+    public StoreSeedService(IStoreDbContext context)
     {
         _context = context;
     }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-public static class ApiMappings
+public static class LoginAndUserEndpoints
 {
     public static void AddLoginAndUserEndpoints(this IEndpointRouteBuilder builder)
     {

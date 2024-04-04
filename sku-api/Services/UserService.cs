@@ -6,12 +6,12 @@ using System.IdentityModel.Tokens.Jwt;
 
 public class UserService : IUserService
 {
-    private readonly StoreDbContext _context;
+    private readonly IStoreDbContext _context;
     private readonly IConfiguration _configuration;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly Serilog.ILogger _logger;
 
-    public UserService(StoreDbContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, Serilog.ILogger logger)
+    public UserService(IStoreDbContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, Serilog.ILogger logger)
     {
         _context = context;
         _configuration = configuration;

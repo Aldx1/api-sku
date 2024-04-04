@@ -13,6 +13,7 @@ public static class StartupExtensions
     /// <param name="builder">The application builder.</param>
     public static void ConfigureServices(this IHostApplicationBuilder builder)
     {
+        
         builder.Services.AddTransient<ISeedDataService, StoreSeedService>();
         builder.Services.AddTransient<IUserService, UserService>();
         builder.Services.AddTransient<IStoreService, StoreService>();
@@ -22,6 +23,7 @@ public static class StartupExtensions
 
         if (builder.Environment.IsDevelopment())
         {
+            builder.Services.AddScoped<IStoreDbContext, StoreDbContext>();
             builder.Services.AddDbContext<StoreDbContext>(opt => opt.UseInMemoryDatabase("Store"));
         }
 
@@ -83,6 +85,7 @@ public static class StartupExtensions
     /// <param name="app">The web application.</param>
     public static void ConfigureApp(this WebApplication app)
     {
+        app.UseMiddleware<ErrorHandlingMiddleware>();
         app.UseMiddleware<JwtMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();

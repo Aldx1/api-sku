@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 public class CartService : ICartService
 {
     private readonly IUserService _userService;
-    private readonly StoreDbContext _context;
+    private readonly IStoreDbContext _context;
     private readonly Serilog.ILogger _logger;
 
-    public CartService(IUserService userService, StoreDbContext context, Serilog.ILogger logger)
+    public CartService(IUserService userService, IStoreDbContext context, Serilog.ILogger logger)
     {
         _userService = userService;
         _context = context;
