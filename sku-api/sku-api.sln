@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sku-api", "sku-api.csproj", "{141C46AB-221E-420B-858D-2B9FD2C2D321}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkuApiTests", "..\sku-api-tests\SkuApiTests.csproj", "{72486E0A-9CFB-4B25-B8BB-7AF2EF39857C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sku-api-tests", "..\sku-api-tests\sku-api-tests.csproj", "{72486E0A-9CFB-4B25-B8BB-7AF2EF39857C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
